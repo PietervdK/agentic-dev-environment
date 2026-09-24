@@ -5,7 +5,7 @@ A reproducible AI-assisted software-development environment using Codex, GitHub,
 ## Quick start — Linux
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/PietervdK/agentic-dev-environment.git
 cd agentic-dev-environment
 ./setup.sh
 ```
