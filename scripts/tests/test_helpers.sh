@@ -11,6 +11,23 @@ test_platform_detection() {
   [[ $(detect_platform Alpine 3.20) == unsupported ]]
 }
 
+test_codex_install_path_is_added_for_current_process() {
+  local tmp
+  tmp=$(mktemp -d)
+  trap 'rm -rf "$tmp"' RETURN
+  mkdir -p "$tmp/.local/bin"
+  printf '#!/bin/sh\nprintf codex-test\n' > "$tmp/.local/bin/codex"
+  chmod 755 "$tmp/.local/bin/codex"
+  (
+    HOME_DIR=$tmp
+    unset CODEX_INSTALL_DIR
+    PATH=/usr/bin:/bin
+    ensure_codex_path
+    [[ $(command -v codex) == "$tmp/.local/bin/codex" ]]
+    [[ $(codex --version) == codex-test ]]
+  )
+}
+
 test_codex_sync_preserves_custom_file() {
   local tmp
   tmp=$(mktemp -d)
@@ -57,6 +74,7 @@ test_check_mode_is_read_only() {
 }
 
 test_platform_detection
+test_codex_install_path_is_added_for_current_process
 test_codex_sync_preserves_custom_file
 test_ssh_block_is_idempotent
 test_check_mode_is_read_only

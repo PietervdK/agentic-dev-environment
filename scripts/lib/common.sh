@@ -9,6 +9,14 @@ CHECK_ONLY=${CHECK_ONLY:-0}
 info() { printf '\n==> %s\n' "$*"; }
 warn() { printf 'Warning: %s\n' "$*" >&2; }
 fail() { printf 'Error: %s\n' "$*" >&2; exit 1; }
+ensure_codex_path() {
+  local codex_bin_dir=${CODEX_INSTALL_DIR:-"$HOME_DIR/.local/bin"}
+  [[ -x $codex_bin_dir/codex ]] || return 0
+  case ":${PATH:-}:" in
+    *":$codex_bin_dir:"*) ;;
+    *) PATH="$codex_bin_dir${PATH:+:$PATH}"; export PATH;;
+  esac
+}
 ask_yes_no() {
   local prompt=$1 default=${2:-Y} answer
   [[ -t 0 ]] || return 1

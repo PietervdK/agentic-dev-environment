@@ -29,7 +29,7 @@ else printf 'GitHub CLI is unavailable. Install it from https://cli.github.com/\
 CHECK_ONLY=$CHECK_ONLY "$ROOT/scripts/setup-github.sh"
 CHECK_ONLY=$CHECK_ONLY "$ROOT/scripts/setup-codex.sh"
 if [[ $CHECK_ONLY == 1 ]]; then printf 'Optional Nix setup is available.\n';
-elif ask_yes_no 'Would you like to install/configure optional Nix?' N; then "$ROOT/scripts/setup-nix.sh"; fi
+elif ask_yes_no 'Nix installation is manual; would you like to see the steps for installing it and using the optional developer shell?' N; then "$ROOT/scripts/setup-nix.sh"; fi
 if [[ $CHECK_ONLY == 1 ]]; then printf '\nCheck complete; no changes were made.\n'; else
   printf '\nSetup steps are complete. Run ./setup.sh --verify to check this environment.\n'
 fi

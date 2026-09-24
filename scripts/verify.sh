@@ -15,6 +15,7 @@ git_identity_available() {
      -n $(git config --global --get user.email || true) ]]
 }
 verify() {
+  ensure_codex_path
   read_platform && printf 'Platform: %s %s\n' "$PLATFORM" "$PLATFORM_VERSION" || { printf 'Platform: unsupported\n'; status=1; }
   check 'Git' has_command git
   check 'Git identity' git_identity_available

@@ -28,10 +28,12 @@ If WSL needs installation or a reboot, the wrapper stops and tells you what to d
 - GitHub CLI authentication guidance and an optional dedicated Ed25519 SSH key. Only the public key may be uploaded.
 - Codex CLI using the official OpenAI installer when chosen.
 - Repository-owned `AGENTS.md`, skills, and references under `~/.codex/`.
-- Optional Nix developer shell (`nix develop ./nix`) for reproducible CLI tools.
+- Optional Nix developer shell (`nix develop ./nix`) for reproducible CLI tools. Nix itself is installed manually using the official instructions; setup prints those steps when you choose the Nix option.
 - `scripts/new-project NAME` creates a generic project under `~/projects` by default. Set `PROJECTS_DIR` to choose another parent.
 
-System packages are simpler. Nix provides a pinned package set for the developer shell; OS integration, user configuration, and credentials remain outside it.
+System packages are simpler. Nix provides a pinned package set for the developer shell; OS integration, user configuration, and credentials remain outside it. Choosing the Nix option during setup does not install Nix: follow the printed instructions, start a new terminal, then run `nix develop ./nix` from this repository.
+
+The Codex installer defaults to `~/.local/bin`. Setup and verification add that directory to their current process PATH, so a new terminal is not needed to verify a fresh install. New interactive shells use the installer's shell PATH configuration.
 
 ## What is not stored
 
