@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+name=${1:-}
+[[ $name =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]] || { printf 'Usage: scripts/new-project NAME\nNAME may contain letters, numbers, dots, underscores, and hyphens.\n' >&2; exit 2; }
+projects_dir=${PROJECTS_DIR:-$HOME/projects}
+target="$projects_dir/$name"
+[[ ! -e $target ]] || { printf 'Target already exists: %s\n' "$target" >&2; exit 1; }
+mkdir -p "$projects_dir"
+cp -R "$ROOT/templates/project/." "$target/"
+git -C "$target" init -b main
+printf 'Created %s\n' "$target"

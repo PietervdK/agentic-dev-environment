@@ -1,0 +1,24 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Common language and build artifacts
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+dist/
+build/
+coverage/
+*.log
+
+# Editor and OS configuration
+.vscode/settings.json
+.DS_Store
+Thumbs.db
+
+# Codex runtime-managed skills are not repository configuration
+/codex/skills/.system/
+__pycache__/
+*.py[cod]

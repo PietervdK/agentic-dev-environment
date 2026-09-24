@@ -1,0 +1,13 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+.venv/
+
+# Common generated files
+build/
+dist/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
